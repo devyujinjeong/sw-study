@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>결재 문서 작성</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9fafb;
+            padding: 30px;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 24px;
+        }
+        .left-section {
+            flex: 2;
+            margin-right: 24px;
+        }
+        .right-section {
+            flex: 1;
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 16px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .approval-step {
+            margin-bottom: 20px;
+        }
+        .approval-step h4 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #374151;
+        }
+        .approval-step select,
+        .approval-step input {
+            width: 100%;
+            margin-bottom: 8px;
+        }
+        .person-list {
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        .person {
+            padding: 6px 0;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+        .person:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 왼쪽: 문서 작성 -->
+    <div class="left-section">
+        <h2>결재 문서 작성</h2>
+
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" id="title" placeholder="제목을 입력하세요">
+        </div>
+
+        <div class="form-group">
+            <label for="document">결재 문서</label>
+            <textarea id="document" rows="8" placeholder="결재할 문서를 작성하세요"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="reason">사유 (선택)</label>
+            <textarea id="reason" rows="4" placeholder="필요한 경우 사유를 작성하세요"></textarea>
+        </div>
+    </div>
+
+    <!-- 오른쪽: 결재선 -->
+    <div class="right-section">
+        <h3>결재선 설정 (최대 3단계)</h3>
+
+        <div class="approval-step">
+            <h4>1단계</h4>
+            <div class="person-list">
+            </div>
+        </div>
+
+        <div class="approval-step">
+            <h4>2단계</h4>
+            <div class="person-list">
+            </div>
+        </div>
+
+        <div class="approval-step">
+            <h4>3단계</h4>
+            <div class="person-list">
+            </div>
+        </div>
+    </div>
+</div>

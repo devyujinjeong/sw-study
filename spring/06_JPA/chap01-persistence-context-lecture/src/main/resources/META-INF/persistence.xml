@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JPA 설정 파일로 엔티티 매니저 팩토리 설정을 위한 내용-->
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
+
+    <!-- 엔티티 매니저 팩토리를 식별하기 위한 이름 설정 -->
+    <persistence-unit name="jpatest">
+
+        <!-- 현재 우리는 springboot 환경이 아니기 때문에 이를 스캔할 수 없다.-->
+        <!-- 그렇기 때문에 이게 취급할 엔티티라고 여기에서는 명시 해줘야 함-->
+        <class>com.dbwls.section02.crud.Menu</class>
+        <class>com.dbwls.section03.entity.Menu</class>
+
+        <properties>
+            <!-- 필수 속성 -->
+            <!-- 데이터 베이스 연결 정보 -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/menudb"/>
+            <property name="jakarta.persistence.jdbc.user" value="swcamp"/>
+            <property name="jakarta.persistence.jdbc.password" value="swcamp"/>
+            <!-- hibernate 설정 (실행 되는 sql 구문을 format 형태로 보여준다) -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

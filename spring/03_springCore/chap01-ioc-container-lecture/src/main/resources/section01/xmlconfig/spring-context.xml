@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Configuration Metadate로 MemberDTO 객체를 Bean으로 등록하고
+    그 객체를 생성할 때 전달할 인자들을 설정하는 역할-->
+
+    <!-- id는 bean의 식별자이고, class에서 이 Bean이 어떤 클래스로 생성될지 정의 -->
+    <bean id="member" class="com.dbwls.common.MemberDTO" >
+        <!-- index로 지정해도 되고, name을 통해서 지정해도 된다. -->
+        <!-- 생성자를 호출할 때 전달할 인자를 정의
+        아무것도 작성하지 않으면 기본 생성자를 사용한다는 의미-->
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg name="id" value="user01"/>
+        <constructor-arg index="2"><value>pass01</value></constructor-arg>
+        <constructor-arg name="name"><value>홍길동</value></constructor-arg>
+    </bean>
+</beans>

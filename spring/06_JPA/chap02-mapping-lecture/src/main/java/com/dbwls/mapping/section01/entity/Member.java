@@ -1,0 +1,81 @@
+package com.dbwls.mapping.section01.entity;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+
+@Entity(name = "entityMember") // 엔티티라는 것을 알려주는 어노테이션
+@Table(name = "tbl_member") // 어떤 테이블과 매핑 되는지 알려줌
+@TableGenerator( // 시퀀스를 관리하는 별도의 테이블을 생성한 것
+        name = "member_seq_tbl_generator",
+        table = "tbl_my_sequences",
+        pkColumnValue = "my_seq_member_no"
+)
+@Access(AccessType.FIELD) // 클래스 레벨에 작성 시 모든 필드에 대한 접근 방식 설정 (default:FIELD)
+public class Member {
+
+    @Id
+    @Column(name = "member_no")
+    // DB에 기본 키 생성을 위임하는 것
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "member_seq_tbl_generator")
+    private int memberNo;
+
+    @Access(AccessType.FIELD) // 필드 레벨에 작성 시 해당 필드에 대한 접근 방식 설정
+    @Column(
+            name = "member_id", unique = true,
+            nullable = false, columnDefinition = "varchar(10)"
+    )
+    private String memberId;
+
+    @Column(name = "member_pwd", nullable = false)
+    private String memberPwd;
+
+    @Column(name = "member_name")
+    private String memberName;
+
+    @Transient // 이것을 넣었기 때문에, phone는 생성되지 않음
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "address", length = 900)
+    private String address;
+
+    @Column(name = "enroll_date")
+    private LocalDateTime enrollDate;
+
+    @Column(name = "member_role")
+    @Enumerated(EnumType.STRING)
+    private MemberRole memberRole;
+
+    @Column(name = "status", columnDefinition = "char(1) default 'Y'")
+    private String status;
+
+    protected Member() {}
+
+    public Member(
+            String memberId, String memberPwd, String memberName,
+            String phone, String address, LocalDateTime enrollDate,
+            MemberRole memberRole, String status
+    ) {
+        this.memberId = memberId;
+        this.memberPwd = memberPwd;
+        this.memberName = memberName;
+        this.phone = phone;
+        this.address = address;
+        this.enrollDate = enrollDate;
+        this.memberRole = memberRole;
+        this.status = status;
+    }
+
+    @Access(AccessType.PROPERTY)
+    public String getMemberName(){
+        System.out.println("프로퍼티 접근 방식 사용됨");
+        // 프로퍼티 접근 방식으로 변경한다는 것은 필드 값을 가공하는 로직이 필요하다는 의미
+        return memberName + "님";
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+}

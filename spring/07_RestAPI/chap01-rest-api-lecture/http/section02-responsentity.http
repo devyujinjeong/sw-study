@@ -1,0 +1,21 @@
+### 신규 유저 등록
+POST http://localhost:8080/entity/users
+Content-Type: application/json
+
+{
+  "id" : "user04",
+  "pwd" : "pass04",
+  "name" : "정유진"
+}
+
+### 유저 수정하기
+PUT http://localhost:8080/entity/users/1
+Content-Type: application/json
+
+{
+    "pwd": "passpass",
+    "name" : "수정된 이름"
+}
+
+### 유저 삭제하기
+GET http://localhost:8080/entity/users

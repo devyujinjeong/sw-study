@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="step01">
+      <!-- 속성 바인딩 : v-bind, 생략 가능 -->
+      <!-- 즉, 속성을 동적으로 바인딩 해주는 것이다. -->
+      <!-- Vue에서 HTML 속성에 데이터를 바인딩 할 때 사용되는 디렉티브로
+      동적으로 HTML 속성 값을 설정할 수 있는 방법이다.-->
+
+      <!-- vue라는 아이디와 값을 넣는다. -->
+      <div v-bind:id="dynamicId">{{ dynamicValue }}</div>
+      <!-- skipId라는 아이디와 값을 넣는다.-->
+      <div :id="skipId">{{ skipValue }}</div>
+  </div>
+  <div id="step02">
+      <h5>비활성화</h5>
+      <input :value="isTrue" :disabled="isTrue">
+      <!-- @ : v-on 지시자와 동일한 의미로 이벤트 설정 -->
+      <button @click="activation">{{ isTrue }}</button>
+  </div>
+  <script>
+    const { createApp, ref, reactive } = Vue;
+    createApp({
+      setup() {
+          /* ref : 반응성 변수 선언시 사용하는 함수
+          * 반응성 변수 : 데이터 값 변경 시 자동으로 템플릿 업데이트 */
+        const dynamicId = ref('vue');
+        const dynamicValue = ref('test');
+        const skipId = ref('skipId');
+        const skipValue = ref('test2');
+        return {
+            dynamicId, dynamicValue, skipId, skipValue
+        }
+      }
+    }).mount("#step01");
+
+    createApp({
+        setup() {
+
+            /* ref vs reactive
+            * 1. ref는 모든 자료형에 사용 가능하며 reactive는 객체 자료형에만 사용 가능
+            * 2. ref는 setup 함수 내에서 접근할 때 .value를 사용하며 reactive는 사용 하지 않음
+            * 단, template 영역에서는 둘 다 .value를 사용하지 않음
+            * */
+
+
+            /* 보통 ref는 객체에서는 사용하지 않고, 객체는 reactive를 사용한다.
+            * ref를 사용하면 데이터를 가져오기 위해서는 .value를 사용해야 하고,
+            * 이렇게 사용하면 번거로울 뿐만 아니라 가독성 면에서도 떨어지기 때문이다.*/
+
+            const isTrue = ref(false);
+            const reactiveObj = reactive({ test: 'reactiveValue' });
+            const activation = () => {
+                /* ref 함수로 선언 된 반응성 변수의 값에 접근하기 위해서는 .value 속성으로 접근한다. */
+                console.log(isTrue);
+                console.log(isTrue.value);
+                /* reactive 함수로 선언 된 반응성 변수의 값에 접근 할 때는 .value 속성을 사용하지 않는다. */
+                console.log(reactiveObj.test);
+                isTrue.value = !isTrue.value;
+            };
+            return {
+                isTrue, activation
+            }
+        }
+    }).mount("#step02");
+  </script>
+
+</body>
+</html>

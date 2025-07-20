@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- configuration 태그 안에 설정 정보를 입력 -->
+<configuration>
+    <!-- MyBatis의 작업 설정을 설명하는 XML 파일 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/menudb"/>
+                <property name="username" value="swcamp"/>
+                <property name="password" value="swcamp"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 어떤 mapper와 mapping?! -->
+    <mappers>
+        <mapper resource="mapper.xml"/>
+    </mappers>
+</configuration>
