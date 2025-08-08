@@ -41,6 +41,7 @@ public class FirstController {
     @GetMapping("/modify")
     public void modify(){}
 
+    /* defaultValue를 설정하면, 값을 입력하지 않았을 때 디폴트로 설정한 값이 들어온다. */
     @PostMapping("/modify")
     public String modifyMenu(
             @RequestParam(value = "name", required = false) String modifyName,

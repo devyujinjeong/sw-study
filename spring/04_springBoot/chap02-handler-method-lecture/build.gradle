@@ -19,8 +19,10 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    /* 스프링 MVC를 사용하는 RESTful 애플리케이션을 만들기 위한 의존성으로 기본으로 내장 톰캣이 포함되어 있어 jar 형식으로 실행 가능 */
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    /* JUnit, Jupiter, Mockito 등의 테스트용 라이브러리를 포함 */
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
