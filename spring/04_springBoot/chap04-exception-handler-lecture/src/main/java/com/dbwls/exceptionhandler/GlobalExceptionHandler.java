@@ -4,7 +4,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-/* 해당 어노테이션이 적용 된 클래스의 @ExceptionHandler는 전역적으로  기능한다. */
+/* 해당 어노테이션이 적용 된 클래스의 @ExceptionHandler는 전역적으로 기능한다.
+* 즉, 여러 개의 컨트롤러에서 발생하는 예외를 일괄적으로 처리하기 위해 사용되는 것이다.
+* 이렇게 사용하면, 모든 컨트롤러에서 공통적으로 발생하는 예외를 한 곳에서 처리할 수 있어 코드의 중복을 방지할 수 있다. */
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(NullPointerException.class)

@@ -5,10 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/* Controller 레벨의 Exception 처리 */
 @Controller
 public class ExceptionHandlerController {
     // 여기에서 /controller-null 이 요청을 받아들였을 때, 밑에 메소드가 실행된다.
-    // 이 메소드를 통해 NullpointerException이 발생하면 밑에 핸들러가 이를 예외를 핸들링 하는 것이다. 
+    // 이 메소드를 통해 NullPointerException이 발생하면 밑에 핸들러가 예외를 핸들링 하는 것이다.
     @GetMapping("/controller-null")
     public String nullPointerExceptionTest() {
 
