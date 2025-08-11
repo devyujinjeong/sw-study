@@ -15,9 +15,17 @@ import java.util.UUID;
 
 @Controller
 public class FileUploadController {
+
+    /* 파일을 저장할 경로
+     * application.yml에 등록되어 있는 경로를 가져온다.
+     * yml 파일에 경로나 코드는 보호 되어야 하는 것들이기 때문에, 이런식으로 사용한다.
+     * 그래서 실제로 yml 파일은 github 같은 곳에 올리지 않는다.
+     * 다만, 지금은 연습용이고 보호될 것이 없기 때문에 그냥 yml 파일도 함께 올린 것이다.
+     * */
     @Value("${spring.servlet.multipart.location}")
     private String filePath;
 
+    /* 1. 1개의 파일 업로드 : 물리적 저장 */
     @PostMapping("/single-file")
     public String singleFileUpload(
             @RequestParam String singleFileDescription,
@@ -26,12 +34,13 @@ public class FileUploadController {
         System.out.println("singleFileDescription : " + singleFileDescription);
         System.out.println("singleFile : " + singleFile);
 
-        File dir = new File(filePath);
-        if(!dir.exists()) dir.mkdir();
+        File dir = new File(filePath); // 경로 객체 만들기
+        if(!dir.exists()) dir.mkdir(); // 경로가 없으면 폴더 생성하기
 
-        String savedName = generateSavedFileName(singleFile);
+        String savedName = generateSavedFileName(singleFile); // 저장할 파일명 생성하기
 
         try {
+            // transferTo()를 이용해 지정한 경로로 실제 파일 작성하기
             singleFile.transferTo(new File(filePath + "/" + savedName));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -40,6 +49,7 @@ public class FileUploadController {
         return "result";
     }
 
+    /* 2. 여러개의 파일 업로드 : 물리적 저장 + DB에 저장 */
     @PostMapping("/multi-file")
     public String mutiFileUpload(
             @RequestParam String multiFileDescription,
@@ -73,6 +83,7 @@ public class FileUploadController {
         return "result";
     }
 
+    /* 파일 이름을 생성하는 메소드 */
     private String generateSavedFileName(MultipartFile file){
         String originFileName = file.getOriginalFilename();
         // 확장자는 있어야 어떤 파일인지 구분이 가능하기 때문에 확장자는 보존한다.
